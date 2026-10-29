@@ -27,3 +27,8 @@ dist-ssr
 
 # Claude Code
 CLAUDE.md
+
+# Env (contoh isinya ada di .env.example)
+.env
+.env.*
+!.env.example
