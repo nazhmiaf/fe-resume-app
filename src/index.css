@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* 16px -> 17px: semua ukuran Tailwind/daisyUI pakai rem, jadi teks, box, dan spacing ikut membesar */
+  font-size: 106.25%;
+}
+
+@plugin "daisyui" {
+  themes: resumeApp --default;
+}
+
+/* print resume: kertas A4 tanpa margin browser (margin sudah ada di padding template) */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html {
+    /* ukuran rem balik ke default supaya hasil print sama dengan desain template */
+    font-size: 100%;
+  }
+
+  #resume-preview {
+    /* tanpa ini browser membuang warna background (ikon timeline, dll) */
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+/* semua field form putih (default daisyUI pakai base-100 yang sedikit abu).
+   Sengaja di luar @layer: class daisyUI ada di layer utilities, jadi override di dalam layer akan kalah */
+.input,
+.textarea,
+.select {
+  background-color: white;
+}
+
+@plugin "daisyui/theme" {
+  name: "resumeApp";
+  default: true;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(98% 0.001 106.423);
+  --color-base-200: oklch(97% 0.001 106.424);
+  --color-base-300: oklch(92% 0.003 48.717);
+  --color-base-content: oklch(21% 0.006 56.043);
+  --color-primary: #166534;
+  --color-primary-content: oklch(97% 0.014 254.604);
+  --color-secondary: #0F172A;
+  --color-secondary-content: oklch(100% 0 0);
+  --color-accent: #F59E0B;
+  --color-accent-content: oklch(97% 0.014 254.604);
+  --color-neutral: #1E293B;
+  --color-neutral-content: oklch(98% 0.001 106.423);
+  --color-info: oklch(68% 0.169 237.323);
+  --color-info-content: oklch(97% 0.013 236.62);
+  --color-success: oklch(70% 0.14 182.503);
+  --color-success-content: oklch(98% 0.014 180.72);
+  --color-warning: oklch(79% 0.184 86.047);
+  --color-warning-content: oklch(98% 0.026 102.212);
+  --color-error: oklch(64% 0.246 16.439);
+  --color-error-content: oklch(96% 0.015 12.422);
+  --radius-selector: 2rem;
+  --radius-field: 1rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1.5px;
+  --depth: 0;
+  --noise: 1;
+}
